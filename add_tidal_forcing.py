@@ -35,7 +35,7 @@ def lon_lat_r(body, time, earth_radius=6371e3):
 
     """
     Use SPICE software to get longitude and latitude of the point on Earth at
-    which <body> is in zenith, and the distance between the barycenters of Earth
+    which <body> is in zenith and the distance between the barycenters of Earth
     and <body> at a specified <time> (in UTC). We're pretending the earth is a
     sphere here, as is commonly done in tidal studies (and presumably is done in
     the ocean model this is fed into).
@@ -70,7 +70,7 @@ def lon_lat_r(body, time, earth_radius=6371e3):
 
 def GM(body):
     """
-    Use SPICE software to get the product of the gravitational constant and thei
+    Use SPICE software to get the product of the gravitational constant and the
     mass of <body>. Input is SPICE name, e.g. "SUN" or "MOON".
     """
     _, GM = spice.bodvrd(body, "GM", 1)
@@ -183,7 +183,7 @@ lon = np.deg2rad(f["lon"])
 # number of days in the specified year
 days = 366 if calendar.isleap(year) else 365
 
-# map to output file (overwrites existing file, change to "r+"?)
+# map to output file (overwrites existing file!)
 p_out = np.memmap("{:s}jra55_pres_tide_{:4d}".format(path, year),
         dtype=np.dtype(">f"), mode="w+", shape=(days*24,320,640))
 
