@@ -122,8 +122,8 @@ def pres_tide(lon, lat, time, rho, earth_radius=6371e3, h2=0.61, k2=0.30):
     moon_GM = GM("MOON")
 
     # potentials
-    sun_V = sun_GM/sun_r*sun_xi**2*scs.legendre(2)(sun_mu)
-    moon_V = moon_GM/moon_r*moon_xi**2*scs.legendre(2)(moon_mu)
+    sun_V = -sun_GM/sun_r*sun_xi**2*scs.legendre(2)(sun_mu)
+    moon_V = -moon_GM/moon_r*moon_xi**2*scs.legendre(2)(moon_mu)
 
     # convert to pressure and make solid earth tide correction
     sun_p = (1+k2-h2)*rho*sun_V
