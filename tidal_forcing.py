@@ -1,14 +1,3 @@
-# This script calculates the tidal forcing for a given year and saves it in
-# hourly increments. The script calculates the tidal potential from knowledge of
-# the sun and moon at a given moment, and it corrects for the solid-earth tide.
-# See, for example, Wunsch: Modern Observational Physical Oceanography, 2015,
-# chapter 6 for the relevant theory.
-
-# This script makes use of the NASA software SPICE. It thus requires the package
-# spiceypy (github.com/AndrewAnnex/SpiceyPy), which is a Python wrapper to that
-# software. Also required are the kernels listed in <metakernel.txt>, which can
-# be downloaded from naif.jpl.nasa.gov/pub/naif/generic_kernels/.
-
 import spiceypy as spice
 import numpy as np
 import scipy.special as scs
@@ -26,7 +15,7 @@ year = 2020
 print(spice.tkvrsn('TOOLKIT'))
 
 # load kernels
-spice.furnsh("meta_kernel.txt")
+spice.furnsh("meta_kernel")
 
 def lon_lat_r(body, time, earth_radius=6371e3):
 
@@ -129,8 +118,8 @@ def tidal_potential(lon, lat, time, earth_radius=6371e3, h2=0.61, k2=0.30):
 days = 366 if calendar.isleap(year) else 365
 
 # map to output file (overwrites existing file!)
-V_out = np.memmap("{:s}tide_{:4d}".format(path, year),
-        dtype=np.dtype(">f"), mode="w+", shape=(days*24,181,360))
+V_out = np.memmap("{:s}tide_{:4d}".format(path, year), dtype=np.dtype(">f"),
+        mode="w+", shape=(days*24,181,360))
 
 # loop over hours
 for i in range(days*24):
@@ -146,6 +135,6 @@ for i in range(days*24):
     # get tidal forcing and save to file (using memmap)
     V_out[i,:,:] = tidal_potential(lon, lat, time)
 
-    # save figure (origin bug!)
+    # save figure
     plt.imsave("fig/pot_{:4d}_{:05d}.png".format(year, i), V_out[i,:,:],
             vmin=-5, vmax=5, dpi=300)
