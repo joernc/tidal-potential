@@ -68,7 +68,7 @@ def GM(body):
 def mu(lon1, lat1, lon2, lat2):
     """
     Calculate the cosine of the zenith angle alpha (using the spherical law of
-    cosines.
+    cosines).
     """
     return np.sin(lat1)*np.sin(lat2)+np.cos(lat1)*np.cos(lat2)*np.cos(lon2-lon1)
 
@@ -81,14 +81,14 @@ def tidal_potential(lon, lat, time, earth_radius=6371e3, h2=0.61, k2=0.30):
     Phys.).
 
     Input:
-      lon, lat     - longitude and latitude at which to compute pressure (in
-                     radians)
+      lon, lat     - longitude and latitude at which to compute the tidal
+                     potential (in radians)
       time         - date and time in datetime format (in UTC)
     Optional input:
       earth_radius - Earth's radius (default 6371e3 m)
       h2, k2       - Love numbers (default h2 = 0.61, k2 = 0.30)
     Output:
-      p_tide       - surface pressure field representing tidal forcing
+      V_tide       - tidal potential
     """
 
     # get position in rectangular coordinate system
