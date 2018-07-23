@@ -10,3 +10,4 @@ or
 ```bash
 python3 tidal-potential.py 2018
 ```
+The forcing fields that can be read into the ocean model are written to `input/`.
