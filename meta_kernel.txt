@@ -5,6 +5,6 @@ KERNELS_TO_LOAD=(
 'kernels/spk/planets/de430.bsp',
 'kernels/pck/pck00010.tpc',
 'kernels/pck/gm_de431.tpc',
-'kernels/pck/earth_000101_170522_170228.bpc'
+'kernels/pck/earth_070425_370426_predict.bpc'
 )
 \begintext
