@@ -4,9 +4,9 @@ This script makes use of the NASA software [SPICE](https://naif.jpl.nasa.gov/nai
 
 To generate the tidal forcing for the year 2018, execute the script with:
 ```bash
-./tidal-forcing.py 2018
+./tidal-potential.py 2018
 ```
 or
 ```bash
-python3 tidal-forcing.py 2018
+python3 tidal-potential.py 2018
 ```
