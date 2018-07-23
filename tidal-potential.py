@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+
+import sys
 import spiceypy as spice
 import numpy as np
 import scipy.special as scs
@@ -5,11 +8,11 @@ import datetime as dt
 import calendar
 import matplotlib.pyplot as plt
 
+# year of the tidal forcing
+year = int(sys.argv[1])
+
 # path to output directory
 path = "input/"
-
-# year of the tidal forcing
-year = 2020
 
 # print toolkit version numbers
 print(spice.tkvrsn('TOOLKIT'))
