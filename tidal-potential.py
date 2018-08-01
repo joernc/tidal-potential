@@ -11,6 +11,9 @@ import matplotlib.pyplot as plt
 # year of the tidal forcing
 year = int(sys.argv[1])
 
+# Earth orientation data ("IAU_EARTH" or "ITRF93")
+pck = sys.argv[2]
+
 # path to output directory
 path = "input/"
 
@@ -42,7 +45,7 @@ def lon_lat_r(body, time, earth_radius=6371e3):
     time = spice.str2et(str(time) + " UTC")
 
     # get position in rectangular coordinate system (body frame of Earth)
-    pos_rec, _ = spice.spkpos(body, time, "ITRF93", "NONE", "EARTH")
+    pos_rec, _ = spice.spkpos(body, time, pck, "NONE", "EARTH")
 
     # transform to geodetic coordinates assuming zero flatness (to get lat/lon)
     pos_geo = spice.recgeo(pos_rec, earth_radius/1e3, 0)
@@ -121,8 +124,8 @@ def tidal_potential(lon, lat, time, earth_radius=6371e3, h2=0.61, k2=0.30):
 days = 366 if calendar.isleap(year) else 365
 
 # map to output file (overwrites existing file!)
-V_out = np.memmap("{:s}tide_{:4d}".format(path, year), dtype=np.dtype(">f"),
-        mode="w+", shape=(days*24,181,360))
+V_out = np.memmap("{:s}tide_{:s}_{:4d}".format(path, pck, year),
+        dtype=np.dtype(">f"), mode="w+", shape=(days*24,181,360))
 
 # loop over hours
 for i in range(days*24):

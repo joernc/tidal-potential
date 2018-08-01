@@ -4,10 +4,12 @@ This script makes use of the NASA software [SPICE](https://naif.jpl.nasa.gov/nai
 
 To generate the tidal forcing for the year 2018, execute the script with:
 ```bash
-./tidal-potential.py 2018
+./tidal-potential.py 2018 IAU_EARTH
 ```
 or
 ```bash
-python3 tidal-potential.py 2018
+python3 tidal-potential.py 2018 IAU_EARTH
 ```
 The forcing fields that can be read into the ocean model are written to `input/`.
+
+SPICE uses Earth orientation data provided by a PCK kernel. The IAU_EARTH orientation model has relatively low accuracy but extends into the future indefinitely. Should higher accuracy be needed, use ITRF93 instead. To use this, be sure to add either `earth_070425_370426_predict.bpc` or `earth_latest_high_prec.bpc` to `meta_kernel`, depending on whether you need prediction or not. See the documentation of the [IAU_EARTH kernel](https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00010.tpc) for a discussion of its accuracy and the [documentation of the high-accuracy kernels](https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/aareadme.txt) for which one to use.
